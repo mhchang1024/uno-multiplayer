@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head') %>
+  </head>
+
+  <body>
+    <div class="container_no_chat">
+      <main>
+        <div class="centered-content">
+         
+          <ul class="nav-list">
+            <h1 class="uno-title">
+              <a href="/" onclick="window.location.href = this.href; return false;">UNO</a>
+            </h1>
+            <li><a href="/rules#rules">Rules</a></li>
+            <li><a href="/login">login</a></li>
+
+          </ul>
+        </div>
+        <div class="content-wrapper">
+          <div class="current-games">
+            current games
+            <div>
+              <% openrooms.forEach(function(room) { %>
+              <li>
+                <%= room.name %> - <%= room.players.length %> players - Status:
+                <%= room.status %>
+              </li>
+              <% }); %>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer"><%- include('partials/footer') %></footer>
+    </div>
+    <script src="/scripts/uno.js"></script>
+  </body>
+</html>

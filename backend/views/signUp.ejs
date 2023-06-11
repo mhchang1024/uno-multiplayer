@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head') %>
+
+    <script src="/scripts/bundle.js"></script>
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+  </head>
+  <body class="signup-body">
+    <div class="centered-content">
+    <ul class="nav-signup">
+      <h1 class="uno-title">
+        <a href="/" onclick="window.location.href = this.href; return false;">UNO</a>
+      </h1>
+    </ul>
+   </div>
+    <div class="signUp-container">
+      <div>
+        <% if (error !== "") { %>
+        <div class="error-message">Error: <%= error %></div>
+        <div class="error-message">
+          username or email already exist.
+        <% } %>
+      <form class="signup-form" method="post" action="/auth/signup">
+        <h2>Sign up </h2>
+        <label>
+          <em>Username</em>
+          <input class="input-field" name="username" autocomplete="username" />
+        </label>
+        <label>
+          <em>Email</em>
+          <input
+            class="input-field"
+            name="email"
+            type="email"
+            autocomplete="email"
+          />
+        </label>
+        <label>
+          <em>Password</em>
+          <input
+            class="input-field"
+            name="password"
+            type="password"
+            autocomplete="new-password"
+          />
+        </label>
+        <label>
+          <em>Confirm Password</em>
+          <input
+            class="input-field"
+            name="confirm_password"
+            type="password"
+            autocomplete="new-password"
+          />
+        </label>
+        <label class="terms">
+          <input type="checkbox" name="terms" required />
+          I agree to the <a href="/terms">terms of service</a>.
+        </label>
+        <input class="submit-btn" type="submit" value="SignUp" />
+      </form>
+      <footer class="footer"><%- include('partials/footer') %></footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('partials/head'); %>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/scripts/socket-connection.js"></script>
+    <script src="/scripts/uno.js"></script>
+    <script>
+      function onload(e) {
+        console.log("onload");
+        var room = document.getElementById("room");
+        let x = sessionStorage.getItem("login");
+        let user = JSON.parse(x);
+
+        const message = {
+          user: user.username,
+          room: room.value,
+        };
+
+        console.log(message);
+        socket.emit("joinroom", JSON.stringify(message));
+      }
+    </script>
+  </head>
+
+  <body onload="onload()">
+    <div class="container">
+      <%- include('partials/header'); %>
+
+      <main class="main">
+        <h1>Room: <%= roomname %></h1>
+        <p>Waiting room</p>
+        <p>Host: <%= host %></p>
+        <div>
+          <div>Players</div>
+          <div id="players">
+            <% players.forEach(function(p) { %>
+            <li><%= p.name %></li>
+            <% }); %>
+          </div>
+        </div>
+        <% if(ishost === true){ %>
+        <div>
+          <a id="startgame" href="\startgame?room=<%= roomname %>">
+            Start game</a
+          >
+        </div>
+
+        <% } else{ %> Waiting for host to start the game <% } %>
+      </main>
+      <aside class="sidebar">
+        <h2>Chat</h2>
+        <form id="input-form" onsubmit="sendMessage(event);">
+          <label for="message">Message:</label>
+          <input id="message" type="text" name="message" />
+          <input id="room" type="hidden" name="room" value="<%= roomname %>" />
+          <input type="submit" value="Send" />
+          <div id="chatbox">
+            <% chats.forEach(function(p) { %>
+            <div class="chattext"><%= p.player %> : <%= p.message %></div>
+            <% }); %>
+          </div>
+        </form>
+      </aside>
+      <footer class="footer"><%- include('partials/footer'); %></footer>
+    </div>
+  </body>
+</html>

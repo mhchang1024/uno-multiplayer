@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel="stylesheet" href="/stylesheets/home.css" />
+  <script>
+    function startNewGame(e) {
+      console.log("startNewGame");
+      var room = document.getElementById("roomname");
+
+      let x = sessionStorage.getItem("login");
+
+      let user = JSON.parse(x);
+
+      const message = {
+        user: user.username,
+        room: room.value,
+      };
+
+      //socket.emit("joinroom", JSON.stringify(message));
+    }
+  </script>  
+</head>
+
+<body class="signup-body">
+  <ul class="nav">
+    <li><a href="/">Home</a></li>
+  </ul>
+
+  <div class="signUp-container">
+    <form id="create-game" action="newgame" method="post" class="signup-form" onsubmit="startNewGame(event)">
+      <label for="roomname"> 
+        <em>Room Name: </em>
+        <input class="input-field" id="roomname" type="text" name="roomname" />
+      </label> 
+      <label for="password"> 
+        <em>Password:</em>
+        <input class="input-field" pass="gamePass" type="password" id="password" name="password" /> 
+      </label>         
+      <label> 
+        <em>Number of Players:</em> 
+        <input class="input-field" players="number" type="text" name="players" value="4" id="numberPlayer"
+          name="numberPlayer" />
+      </label> 
+      <input class="submit-btn" type="submit" />
+    </form>
+  </div>
+
+  <footer class="footer"> <%- include ('partials/footer')%></footer>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/home.css" />
+  </head>
+  <body class="signup-body">
+    <ul class="nav">
+      <li><a href="/">Home</a></li>
+    </ul>
+      <div class="form-box">
+        <form id="join-game" action="/joinGame" method="post">
+          <label for="RoomName">Room Name:</label>
+          <input id="room" type="text" name="room" value="<%= room %>" />
+          <label for="Password">Password:</label>
+          <input
+            pass="gamePass"
+            type="password"
+            id="password"
+            name="password"
+          />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+      <% if(error !== ""){ %>
+      <div class="error-message">Error: <%= error %></div>
+      <% } %>
+
+    <footer class="footer"><%- include('partials/footer')%></footer>
+  </body>
+</html>
